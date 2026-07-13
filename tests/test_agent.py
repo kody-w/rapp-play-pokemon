@@ -31,6 +31,7 @@ from agent import (
     normalize_brain_decision,
     parse_agent_action,
     public_runtime_status,
+    rock_tunnel_route_guidance,
     runner_main,
     runtime_command,
     runtime_status,
@@ -116,6 +117,23 @@ def test_copilot_prompt_keeps_static_rules_in_system_message():
     assert "1F south exit (15,33)" in GAME_SYSTEM_PROMPT
     assert "B1F (3,33) is not an exit" in GAME_SYSTEM_PROMPT
     assert not hasattr(CopilotBrain, "_decide_cli")
+
+
+@pytest.mark.parametrize(
+    ("map_id", "coordinates", "expected"),
+    [
+        (232, {"x": 33, "y": 25}, "B1F ladder (27,3)"),
+        (232, {"x": 23, "y": 11}, "B1F ladder (3,3)"),
+        (82, {"x": 15, "y": 3}, "1F ladder (37,3)"),
+        (82, {"x": 5, "y": 3}, "1F ladder (17,11)"),
+        (82, {"x": 37, "y": 17}, "south exit"),
+    ],
+)
+def test_rock_tunnel_route_guidance(map_id, coordinates, expected):
+    guidance = rock_tunnel_route_guidance(
+        {"map_id": map_id, "coordinates": coordinates}
+    )
+    assert expected in guidance
 
 
 @pytest.mark.parametrize(

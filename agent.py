@@ -1323,6 +1323,42 @@ def collision_ascii(pyboy: Any) -> Optional[str]:
         return None
 
 
+def rock_tunnel_route_guidance(game_state: dict[str, Any]) -> Optional[str]:
+    map_id = game_state.get("map_id")
+    coordinates = game_state.get("coordinates")
+    if not isinstance(coordinates, dict):
+        return None
+    x = coordinates.get("x")
+    y = coordinates.get("y")
+    if not isinstance(x, int) or not isinstance(y, int):
+        return None
+    if map_id == 232:
+        if x >= 24 or y >= 20:
+            return (
+                "Authoritative route stage: navigate to B1F ladder (27,3). "
+                "Do not use Dig and do not route toward (3,33)."
+            )
+        return (
+            "Authoritative route stage: navigate to B1F ladder (3,3), "
+            "then take it to Rock Tunnel 1F. Never use Dig."
+        )
+    if map_id == 82:
+        if x <= 10:
+            return "Authoritative route stage: navigate to 1F ladder (17,11)."
+        if x >= 30 and y >= 12:
+            return (
+                "Authoritative final stage: navigate to the south exit at "
+                "(15,33) or (15,35), then continue south toward Lavender Town."
+            )
+        if y <= 8:
+            return "Authoritative route stage: navigate to 1F ladder (37,3)."
+        return (
+            "Authoritative final stage: navigate to the south exit at "
+            "(15,33) or (15,35)."
+        )
+    return None
+
+
 class ClipRecorder:
     def __init__(self, runtime_dir: Path, fps: int = 30):
         self.clips_dir = runtime_dir / "clips"
@@ -3129,11 +3165,15 @@ class PokemonRunner:
             / f"decision-{self.run_id}-{self.decision_sequence + 1:08d}.png"
         )
         image.save(screenshot, format="PNG")
+        decision_state = dict(game_state)
+        route_guidance = rock_tunnel_route_guidance(game_state)
+        if route_guidance:
+            decision_state["route_guidance"] = route_guidance
         request = {
             "decision_id": self.decision_sequence + 1,
             "generation": self.control_generation,
             "screenshot": str(screenshot),
-            "game_state": game_state,
+            "game_state": decision_state,
             "collision_map": collision_map,
             "history": list(self.history[-8:]),
         }

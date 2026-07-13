@@ -1,0 +1,11 @@
+include agent.py
+include bootstrap.sh
+include launch.sh
+include uninstall.sh
+include config.example.json
+include requirements-rapp.txt
+include CONTRIBUTING.md
+include SECURITY.md
+include LICENSE
+recursive-include scripts *.py
+recursive-include tests *.py

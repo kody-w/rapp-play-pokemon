@@ -1,0 +1,16 @@
+{
+  "rom_path": null,
+  "runtime_dir": "~/.rapp/rapp-play-pokemon",
+  "port": 8765,
+  "clip_minutes": 10,
+  "model": "gpt-5.6-sol",
+  "decision_timeout": 180,
+  "startup_timeout": 180,
+  "max_clips": 200,
+  "max_states": 256,
+  "max_storage_gb": 20,
+  "min_free_gb": 2,
+  "visible": false,
+  "open_viewer": true,
+  "resume": true
+}

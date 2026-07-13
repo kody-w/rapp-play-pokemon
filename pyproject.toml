@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=75,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rapp-play-pokemon"
+version = "1.0.0"
+description = "A canonical RAPP cartridge for a local Copilot-powered Pokemon Red playthrough"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Kody W" }]
+keywords = ["rapp", "github-copilot", "pyboy", "agent", "pokemon"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = []
+
+[project.optional-dependencies]
+runtime = [
+  "github-copilot-sdk>=1.0.6,<2",
+  "Pillow>=10,<13",
+  "PyBoy>=2.6.1,<3",
+]
+dev = [
+  "build>=1.2,<2",
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+rapp-play-pokemon = "rapp_play_pokemon.cli:main"
+rapp-register-pokemon = "rapp_play_pokemon.brainstem:main"
+
+[project.urls]
+Homepage = "https://github.com/kody-w/rapp-play-pokemon"
+Issues = "https://github.com/kody-w/rapp-play-pokemon/issues"
+Source = "https://github.com/kody-w/rapp-play-pokemon"
+
+[tool.setuptools]
+packages = ["rapp_play_pokemon"]
+py-modules = ["agent"]
+
+[tool.setuptools.package-dir]
+rapp_play_pokemon = "src/rapp_play_pokemon"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+extend-exclude = [
+  ".rapp",
+  ".rapp-ci",
+  ".references",
+  ".venv",
+  ".venv-dev",
+  ".work-smoke",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "S"]
+ignore = [
+  "S101",
+  "S104",
+  "S110",
+  "S311",
+  "S603",
+  "S607",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]

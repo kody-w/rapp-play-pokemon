@@ -1544,9 +1544,10 @@ Make progress deliberately:
 - In the overworld, use the local collision grid and coordinates to avoid loops.
 - Never use Dig outside battle while traversing a cave; it returns to the
   entrance and discards traversal progress.
-- In Rock Tunnel B1F, the learned Route 10 boundary is west of (3,33).
-  After Route 10 loads, continue south toward Lavender Town and do not
-  re-enter Rock Tunnel.
+- Follow Rock Tunnel's verified warp sequence from the north entrance:
+  1F ladder (37,3) -> B1F ladder (27,3) -> 1F ladder (17,11) ->
+  B1F ladder (3,3) -> 1F south exit (15,33) or (15,35).
+  B1F (3,33) is not an exit; do not route there.
 - Do not issue more than {MAX_BUTTONS_PER_DECISION} buttons. Repeated directions
   are allowed, but avoid long blind walks.
 - Set checkpoint true after a badge, major story event, new important location,

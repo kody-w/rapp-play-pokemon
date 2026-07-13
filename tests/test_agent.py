@@ -112,7 +112,9 @@ def test_copilot_prompt_keeps_static_rules_in_system_message():
     assert "finish Pokemon Red" not in prompt
     assert "finish Pokemon Red" in GAME_SYSTEM_PROMPT
     assert "Never use Dig outside battle" in GAME_SYSTEM_PROMPT
-    assert "west of (3,33)" in GAME_SYSTEM_PROMPT
+    assert "B1F ladder (27,3)" in GAME_SYSTEM_PROMPT
+    assert "1F south exit (15,33)" in GAME_SYSTEM_PROMPT
+    assert "B1F (3,33) is not an exit" in GAME_SYSTEM_PROMPT
     assert not hasattr(CopilotBrain, "_decide_cli")
 
 

@@ -22,6 +22,7 @@ from agent import (
     ViewerServer,
     acquire_runtime_lock,
     build_parser,
+    celadon_route_guidance,
     discover_pokemon_red_rom,
     ensure_copilot_runtime,
     file_sha256,
@@ -134,6 +135,15 @@ def test_rock_tunnel_route_guidance(map_id, coordinates, expected):
         {"map_id": map_id, "coordinates": coordinates}
     )
     assert expected in guidance
+
+
+def test_celadon_route_guidance_targets_exact_gym_warps():
+    city = celadon_route_guidance({"map_id": 6, "badges": []})
+    gym = celadon_route_guidance({"map_id": 134, "badges": []})
+    assert "(12,27)" in city
+    assert "use Cut" in city
+    assert "Erika at (4,3)" in gym
+    assert celadon_route_guidance({"map_id": 6, "badges": ["Rainbow"]}) is None
 
 
 @pytest.mark.parametrize(

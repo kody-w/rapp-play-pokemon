@@ -1359,6 +1359,25 @@ def rock_tunnel_route_guidance(game_state: dict[str, Any]) -> Optional[str]:
     return None
 
 
+def celadon_route_guidance(game_state: dict[str, Any]) -> Optional[str]:
+    badges = game_state.get("badges")
+    if isinstance(badges, list) and "Rainbow" in badges:
+        return None
+    map_id = game_state.get("map_id")
+    if map_id == 6:
+        return (
+            "Authoritative Celadon objective: the Gym entrance warp is exactly "
+            "at (12,27). Navigate to (12,27); if the hedge immediately north "
+            "blocks entry, use Cut once and step south into the warp."
+        )
+    if map_id == 134:
+        return (
+            "Authoritative Celadon Gym objective: reach Erika at (4,3), "
+            "defeat her, and obtain the Rainbow Badge."
+        )
+    return None
+
+
 class ClipRecorder:
     def __init__(self, runtime_dir: Path, fps: int = 30):
         self.clips_dir = runtime_dir / "clips"
@@ -3166,7 +3185,10 @@ class PokemonRunner:
         )
         image.save(screenshot, format="PNG")
         decision_state = dict(game_state)
-        route_guidance = rock_tunnel_route_guidance(game_state)
+        route_guidance = (
+            rock_tunnel_route_guidance(game_state)
+            or celadon_route_guidance(game_state)
+        )
         if route_guidance:
             decision_state["route_guidance"] = route_guidance
         request = {

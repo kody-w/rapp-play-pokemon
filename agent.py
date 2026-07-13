@@ -1542,6 +1542,11 @@ Make progress deliberately:
 - Prefer Squirtle if choosing a starter, but adapt to existing progress.
 - In battle, read the screen before choosing Fight, a move, an item, or Run.
 - In the overworld, use the local collision grid and coordinates to avoid loops.
+- Never use Dig outside battle while traversing a cave; it returns to the
+  entrance and discards traversal progress.
+- In Rock Tunnel B1F, the learned Route 10 boundary is west of (3,33).
+  After Route 10 loads, continue south toward Lavender Town and do not
+  re-enter Rock Tunnel.
 - Do not issue more than {MAX_BUTTONS_PER_DECISION} buttons. Repeated directions
   are allowed, but avoid long blind walks.
 - Set checkpoint true after a badge, major story event, new important location,

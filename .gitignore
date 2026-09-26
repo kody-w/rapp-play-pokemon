@@ -1,7 +1,8 @@
 # Python, packaging, and local bootstrap
 .venv/
 .venv-dev/
-.rapp/
+.rapp/*
+!.rapp/member.md
 .references/
 .work-smoke/
 __pycache__/

@@ -1,5 +1,9 @@
 # RAPP Plays Pokémon
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-play-pokemon.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-play-pokemon.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 Run a real, single-file **RAPP cartridge** that lets GitHub Copilot autonomously
 attempt a full playthrough of Pokémon Red in a local PyBoy emulator. It resumes
 long-running progress, records segmented MP4 clips, exposes an authenticated
